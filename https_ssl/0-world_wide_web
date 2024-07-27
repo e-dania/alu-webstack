@@ -1,12 +1,18 @@
 #!/usr/bin/env bash
+# Resolve IP addresses for subdomains of a given domain
 
 domain=$1
 
+if [ -z "$domain" ]; then
+  echo "Usage: $0 <domain_name>"
+  exit 1
+fi
+
 for subdomain in "www" "lb-01" "web-01" "web-02"; do
-    ip=$(dig +short ${subdomain}.${domain})
-    if [ -n "$ip" ]; then
-        echo "The subdomain ${subdomain}.${domain} points to $ip"
-    else
-        echo "Failed to resolve ${subdomain}.${domain}"
-    fi
+  ip=$(dig +short ${subdomain}.${domain})
+  if [ -n "$ip" ]; then
+    echo "The subdomain ${subdomain}.${domain} points to $ip"
+  else
+    echo "Failed to resolve ${subdomain}.${domain}"
+  fi
 done
