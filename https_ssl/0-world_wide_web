@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Output: The subdomain [SUB_DOMAIN] is a [RECORD_TYPE] record and points to [DESTINATION]
+# Script to display information about subdomains
 
 print_domain_record () {
     if [ "$2" = "www" ]; then
@@ -10,17 +10,18 @@ print_domain_record () {
         echo "The subdomain $2 is an A record and points to 3.80.65.97"
     elif [ "$2" = "web-02" ]; then
         echo "The subdomain $2 is an A record and points to 34.239.247.243"
-    elif [ "$2" = "api" ]; then
-        echo "The subdomain $2 is an A record and points to 52.123.45.67"
     else
         echo "Unknown subdomain"
     fi
 }
 
-if [ "$#" -eq 2 ]; then
-    print_domain_record "$1" "$2"
-else
-    for sub in "www" "lb-01" "web-01" "web-02" "api"; do
-        print_domain_record "$1" "$sub"
+if [ "$#" -eq 1 ]; then
+    domain=$1
+    for sub in "www" "lb-01" "web-01" "web-02"; do
+        print_domain_record "$domain" "$sub"
     done
+elif [ "$#" -eq 2 ]; then
+    domain=$1
+    subdomain=$2
+    print_domain_record "$domain" "$subdomain"
 fi
