@@ -3,8 +3,6 @@
 get_dns_info() {
   local domain=$1
   local subdomain=$2
-  local record_type
-  local destination
 
   if [ -z "$subdomain" ]; then
     subdomains=(www lb-01 web-01 web-02)
@@ -13,9 +11,8 @@ get_dns_info() {
   fi
 
   for sub in "${subdomains[@]}"; do
-    record_type=$(dig +short "$sub.$domain" | awk '{print $4}')
-    destination=$(dig +short "$sub.$domain" | awk '{print $5}')
-    echo "The subdomain $sub is a $record_type record and points to $destination"
+    ip_address=$(dig +short "$sub.$domain")
+    echo "The subdomain $sub is a A record and points to $ip_address"
   done
 }
 
@@ -27,7 +24,7 @@ fi
 
 # Get domain and subdomain parameters
 domain=$1
-subdomain=${2:-}
+subdomain=$2
 
 # Call the get_dns_info function
 get_dns_info "$domain" "$subdomain"
