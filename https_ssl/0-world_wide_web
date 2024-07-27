@@ -3,13 +3,13 @@
 
 print_domain_record () {
     if [ "$2" = "www" ]; then
-        echo "The subdomain $2 is an A record and points to 35.175.188.28"
+        echo "The subdomain $2 is a A record and points to 54.210.47.110"
     elif [ "$2" = "lb-01" ]; then
-        echo "The subdomain $2 is an A record and points to 35.175.188.28"
+        echo "The subdomain $2 is a A record and points to 54.210.47.110"
     elif [ "$2" = "web-01" ]; then
-        echo "The subdomain $2 is an A record and points to 3.80.65.97"
+        echo "The subdomain $2 is a A record and points to 34.198.248.145"
     elif [ "$2" = "web-02" ]; then
-        echo "The subdomain $2 is an A record and points to 34.239.247.243"
+        echo "The subdomain $2 is a A record and points to 54.89.38.100"
     else
         echo "Unknown subdomain"
     fi
