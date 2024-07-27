@@ -1,39 +1,12 @@
 #!/usr/bin/env bash
-# Script to display information about subdomains
 
-print_domain_record() {
-    local domain=$1
-    local subdomain=$2
-    local ip
+domain=$1
 
-    case $subdomain in
-        "www")
-            ip="35.175.188.28"
-            ;;
-        "lb-01")
-            ip="35.175.188.28"
-            ;;
-        "web-01")
-            ip="3.80.65.97"
-            ;;
-        "web-02")
-            ip="34.239.247.243"
-            ;;
-        *)
-            echo "Unknown subdomain"
-            return 1
-    esac
-
-    echo "The subdomain $subdomain is a A record and points to $ip"
-}
-
-if [ "$#" -eq 1 ]; then
-    domain=$1
-    for sub in "www" "lb-01" "web-01" "web-02"; do
-        print_domain_record "$domain" "$sub"
-    done
-elif [ "$#" -eq 2 ]; then
-    domain=$1
-    subdomain=$2
-    print_domain_record "$domain" "$subdomain"
-fi
+for subdomain in "www" "lb-01" "web-01" "web-02"; do
+    ip=$(dig +short ${subdomain}.${domain})
+    if [ -n "$ip" ]; then
+        echo "The subdomain ${subdomain}.${domain} points to $ip"
+    else
+        echo "Failed to resolve ${subdomain}.${domain}"
+    fi
+done
