@@ -8,11 +8,12 @@ if [ -z "$domain" ]; then
   exit 1
 fi
 
+echo "Resolving subdomains for $domain..."
 for subdomain in "www" "lb-01" "web-01" "web-02"; do
-  ip=$(dig +short ${subdomain}.${domain})
+  ip=$(dig +short ${subdomain}.${domain} | tail -1)
   if [ -n "$ip" ]; then
-    echo "The subdomain ${subdomain}.${domain} points to $ip"
+    echo "${subdomain}.${domain} -> $ip"
   else
-    echo "Failed to resolve ${subdomain}.${domain}"
+    echo "${subdomain}.${domain} -> not found"
   fi
 done
