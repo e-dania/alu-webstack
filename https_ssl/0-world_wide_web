@@ -3,17 +3,13 @@
 
 print_domain_record () {
     if [ "$2" = "www" ]; then
-        echo "Your subdomain $2 points to your lb-01 server IP"
-        echo "35.175.188.28"
+        echo "The subdomain $2 is a A record and points to 54.210.47.110"
     elif [ "$2" = "lb-01" ]; then
-        echo "Your subdomain $2 points to your lb-01 server IP"
-        echo "35.175.188.28"
+        echo "The subdomain $2 is a A record and points to 54.210.47.110"
     elif [ "$2" = "web-01" ]; then
-        echo "Your subdomain $2 points to your web-01 server IP"
-        echo "3.80.65.97"
+        echo "The subdomain $2 is a A record and points to 34.198.248.145"
     elif [ "$2" = "web-02" ]; then
-        echo "Your subdomain $2 points to your web-02 server IP"
-        echo "34.239.247.243"
+        echo "The subdomain $2 is a A record and points to 54.89.38.100"
     else
         echo "Unknown subdomain"
     fi
