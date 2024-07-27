@@ -2,14 +2,9 @@
 # Script to display information about subdomains
 
 print_domain_record () {
-    if [ "$2" = "www" ]; then
-        echo "The subdomain $2 is a A record and points to 54.210.47.110"
-    elif [ "$2" = "lb-01" ]; then
-        echo "The subdomain $2 is a A record and points to 54.210.47.110"
-    elif [ "$2" = "web-01" ]; then
-        echo "The subdomain $2 is a A record and points to 34.198.248.145"
-    elif [ "$2" = "web-02" ]; then
-        echo "The subdomain $2 is a A record and points to 54.89.38.100"
+    ip=$(dig +short "$2.$1")
+    if [ -n "$ip" ]; then
+        echo "The subdomain $2 is a A record and points to $ip"
     else
         echo "Unknown subdomain"
     fi
